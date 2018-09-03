@@ -76,3 +76,36 @@ function buildParams (key, data, traditional, add) {
   }
 }
 
+/**
+ * 下划线转驼峰
+ * @param  {String} 转换字符串
+ * @param  {Boolean} 首字符是否转大写
+ * @return {String}
+ */
+export function formatCamelString (str = '', upperTtileCase = false) {
+  let reg = upperTtileCase ? `/(?:_|\b)(\w)/g` : /(?:_)(\w)/g
+  return str.replace(reg, (s, s1) => s1.toUpperCase())
+}
+
+/**
+ * 驼峰转下划线
+ * @param  {String} 转换字符串
+ * @param  {String} 连接符
+ * @return {[type]}
+ */
+export function formatUnderlineString (str = '', seq = '_') {
+  return str.replace(/(\w{1})(\w*)/, (s, s1, s2) => (s1.toLowerCase() + s2.replace(/[A-Z]/g, (s) => `${seq}${s.toLowerCase()}`)))
+}
+
+/**
+ * 金额添加分隔符和小数位
+ * @param  {Number|String} 金额 1000
+ * @param  {Number} 小数位数
+ * @param  {String} 千分位分隔符
+ * @return {String} '1,000.00'
+ */
+export function formatMoney (money = 0, fixed = 2, seq = ',') {
+  let re = /\d{1,3}(?=(\d{3})+$)/g
+  money = (+money).toFixed(fixed)
+  return money.replace(/^(\d+)((\.\d+)?)$/, (s, s1, s2) => (s1.replace(re, `$&${seq}`) + s2))
+}
