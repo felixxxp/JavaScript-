@@ -15,8 +15,8 @@ const path = require('path')
 const projects = (process.argv[2] || '').split('|')
 const subFolder = ['app', 'api'] // 工程下检查的目录名
 const fileReg = /\.(js|php|vue|html)$/ //检查的文件类型
-const strReg = /400-005-9151|4000059151|400-0059151|400 005 9151/g // 检查匹配正则
-const target = '95730' // 匹配成功后替换的字符传
+const strReg = /test1|test2|test3/g // 检查匹配正则
+const target = 'here is test' // 匹配成功后替换的字符传
 
 for (let project of projects) {
   for (let folder of subFolder) {
